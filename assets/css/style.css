@@ -1,12 +1,18 @@
 body {
   background-color: #ffffff;
-  color: #ffffff;
+  color: #222121;
   text-align: center;
   margin-top: 2%;
+}
+img {
+  width: 20%;
 }
 input {
   margin-right: 10px;
   padding: 10px;
+}
+.hide {
+  display: none;
 }
 .main-container {
   margin: auto;
@@ -16,4 +22,27 @@ input {
   padding: 20px;
   position: relative;
   max-width: 800px;
+}
+.my-orange {
+  position: absolute;
+  display: block;
+  top: -10px;
+  background-color: #fff;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.orange-words {
+  color: orange;
+  margin-left: 20px;
+  font-style: italic;
+}
+.status-red {
+  color: #fe654f;
+  /* font-size: 2em;
+  vertical-align: middle; */
+}
+.status-green {
+  color: green;
+  font-size: 2em;
+  vertical-align: middle;
 }

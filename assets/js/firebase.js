@@ -27,6 +27,16 @@ $(document).ready(function() {
   const logoutButton = $("#logout-button");
   const status = $("#status");
   const errors = $("#errors");
+  const addItemArea = $("#app-area");
+
+  $("#hideit").click(function() {
+    $("#sign-up-form").hide();
+    $("#login-form").show();
+  });
+  $("#showit").click(function() {
+    $("#login-form").hide();
+    $("#sign-up-form").show();
+  });
 
   //login form
   loginForm.on("submit", e => {
@@ -54,16 +64,27 @@ $(document).ready(function() {
     if (firebaseUser) {
       //logged in user properties
       console.log(firebaseUser);
+      addItemArea.show();
       loginForm.hide();
       signUpForm.hide();
       logoutButton.show();
       status.html('Status: <span class="status-green">logged in</span>');
     } else {
       console.log("not logged in");
+      addItemArea.hide();
       loginForm.hide();
       signUpForm.show();
       logoutButton.hide();
       status.html('Status: <span class="status-red">not logged in</span>');
     }
   });
+
+  //error handling
+  var displayError = message => {
+    console.log("this happened");
+    errors.text(message);
+    setTimeout(() => {
+      errors.empty();
+    }, 4000);
+  };
 });
