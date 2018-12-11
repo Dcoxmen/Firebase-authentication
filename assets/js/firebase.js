@@ -28,6 +28,15 @@ $(document).ready(function() {
   const status = $("#status");
   const errors = $("#errors");
 
+  //login form
+  loginForm.on("submit", e => {
+    e.preventDefault();
+    const email = loginEmail.val();
+    const pass = loginPassword.val();
+    const promise = auth.createUserWithEmailAndPassword(email, pass);
+    promise.catch(e => displayError(e.message));
+  });
+
   //sign up form
   signUpForm.on("submit", e => {
     e.preventDefault();
@@ -37,6 +46,10 @@ $(document).ready(function() {
     promise.catch(e => displayError(e.message));
   });
 
+  logoutButton.on("click", () => {
+    auth.signOut();
+  });
+
   firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
       //logged in user properties
@@ -44,11 +57,13 @@ $(document).ready(function() {
       loginForm.hide();
       signUpForm.hide();
       logoutButton.show();
+      status.html('Status: <span class="status-green">logged in</span>');
     } else {
       console.log("not logged in");
       loginForm.hide();
       signUpForm.show();
       logoutButton.hide();
+      status.html('Status: <span class="status-red">not logged in</span>');
     }
   });
 });
