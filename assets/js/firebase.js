@@ -27,4 +27,28 @@ $(document).ready(function() {
   const logoutButton = $("#logout-button");
   const status = $("#status");
   const errors = $("#errors");
+
+  //sign up form
+  signUpForm.on("submit", e => {
+    e.preventDefault();
+    const email = signUpEmail.val();
+    const pass = signUpPassword.val();
+    const promise = auth.createUserWithEmailAndPassword(email, pass);
+    promise.catch(e => displayError(e.message));
+  });
+
+  firebase.auth().onAuthStateChanged(firebaseUser => {
+    if (firebaseUser) {
+      //logged in user properties
+      console.log(firebaseUser);
+      loginForm.hide();
+      signUpForm.hide();
+      logoutButton.show();
+    } else {
+      console.log("not logged in");
+      loginForm.hide();
+      signUpForm.show();
+      logoutButton.hide();
+    }
+  });
 });
