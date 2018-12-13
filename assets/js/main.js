@@ -76,12 +76,4 @@ $(document).ready(function() {
         "</tr></td>"
     );
   });
-
-  function delete_row(childSnapshot) { 
-    var key = document.getElementById(row).row.childData;
-
-    database.ref().on("child_added", function(childSnapshot).remove();
-    alert('row was removed');
-    reload_page();
-}
 });
