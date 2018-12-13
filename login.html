@@ -1,6 +1,11 @@
 <html>
   <head>
     <title>Authentication</title>
+    <!-- Bootstrap core CSS -->
+    <link
+      href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <link
       href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       rel="stylesheet"
@@ -10,79 +15,170 @@
       rel="stylesheet"
     />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- Moment.js Reference -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
 
   <body>
     <!-- Header -->
     <div class="header">
-      <div><img src="./assets/images/firebase-logo.png" style="margin-top: 1vh" /></div>
+      <div>
+        <img src="./assets/images/firebase-logo.png" style="margin-top: 1vh" />
+      </div>
     </div>
 
     <div class="main-container">
+      <button id="logout-button">Click Here to Log Out</button>
       <form id="sign-up-form">
         <h2>Sign up form</h2>
         <div>
-          <input id="sign-up-email" type="email" placeholder="Email" required />
+          <input
+            class="form-group"
+            id="sign-up-email"
+            type="email"
+            placeholder="Email"
+            required
+          />
         </div>
         <div>
           <input
+            class="form-group"
             id="sign-up-password"
             type="password"
             placeholder="Password"
             required
           />
         </div>
-        <div><button id="sign-up-button">Sign Up</button></div>
+        <div>
+          <button class="btn btn-primary" id="sign-up-button">Sign Up</button>
+        </div>
       </form>
 
       <form id="login-form">
         <h2>Login form</h2>
         <div>
-          <input id="login-email" type="email" placeholder="Email" required />
+          <input
+            class="form-group"
+            id="login-email"
+            type="email"
+            placeholder="Email"
+            required
+          />
         </div>
         <div>
           <input
+            class="form-group"
             id="login-password"
             type="password"
             placeholder="Password"
             required
           />
         </div>
-        <button id="login-button" type="submit">Log In</button>
+        <button class="btn btn-primary" id="login-button" type="submit">
+          Log In
+        </button>
       </form>
-      <button id="logout-button">Log Out</button>
+
       <div class="col-sm-12">
         <!-- Errors -->
         <p id="errors"></p>
       </div>
       <div class="col-sm-12 btn-grp">
-          <button id="hideit">Member Login</button>
-          <button id="showit">Register</button>
+        <button id="hideit">Member Login</button>
+        <button id="showit">Register</button>
       </div>
-      <div class="col-sm-12">
-          <!-- Status -->
-          <p id="status"></p>
+
+      <!-- Authorization -->
+
+      <div class="container" id="to-do-list">
+        <div class="text-center">
+          <h1>Firebase Train Scheduler</h1>
+          <h3>Tools for your inner conductor</h3>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <!-- Status -->
+            <p id="status"></p>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+            <div class="panel-heading col-sm-12">
+              <h4><strong>Add Train to Schedule</strong></h4>
+            </div>
+            <form id="addTrn-form">
+              <div class=" col-sm-12 ">
+                <input
+                  class="form-group"
+                  id="trainName"
+                  size="35"
+                  placeholder="Train Name"
+                  required
+                />
+              </div>
+              <div class="col-sm-12">
+                <input
+                  class="form-group"
+                  id="trainDest"
+                  size="35"
+                  placeholder="Destination"
+                  required
+                />
+              </div>
+              <div class="col-sm-12">
+                <input
+                  class="form-group"
+                  id="trainStart"
+                  size="35"
+                  placeholder="First Train Time (format: 08:00)"
+                  required
+                />
+              </div>
+              <div class="col-sm-12">
+                <input
+                  class="form-group"
+                  id="trainFreq"
+                  size="35"
+                  placeholder="Minutes between runs"
+                  required
+                />
+              </div>
+
+              <div class="blu-bk">
+                <button class="btn btn-primary" id="submit" type="submit">
+                  Click Here to Add
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+            <div class="panel-heading col-sm-12">
+              <h4><strong>Todays Train Schedule</strong></h4>
+            </div>
+            <div class="text-center">
+              <table class="table table-hover" id="trainData">
+                <!-- <p class="filler"></p> -->
+                <thead>
+                  <tr>
+                    <th>Train Name</th>
+                    <th>Destination</th>
+                    <th>Next Arrival</th>
+                    <th>Frequency(minutes)</th>
+                    <th>Minutes Away</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <!-- Authorization -->
-    <div id="to-do-list" class="dashed-container">
-        <div class="cut-sentence">
-          <i class="fa fa-scissors"></i> cut and use in your program
-          <span class="orange-words">Authorization</span>
-        </div>
-  
-        <form id="add-item-form">
-          <h3>To do list</h3>
-          <input type="text" id="item" placeholder="to do item" required />
-          <button type="submit">Add item</button>
-        </form>
-  
-        <div id="to-do-list-items"></div>
-      </div>
+
     <!-- Firebase and app -->
     <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
     <script src="./assets/js/firebase.js" charset="utf-8"></script>
+    <script src="./assets/js/main.js" charset="utf-8"></script>
   </body>
 </html>

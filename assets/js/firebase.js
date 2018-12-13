@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  // Initialize Firebase
+  // Firebase config
   var config = {
     apiKey: "AIzaSyBgUcIoo1YqvalGCRYgDpVqiPK-Hxldeu8",
     authDomain: "logintest-f64e6.firebaseapp.com",
@@ -11,11 +11,11 @@ $(document).ready(function() {
   // Initialize Firebase
   firebase.initializeApp(config);
 
-  //connect to firebase with variables
+  // Make a connection to the Firebase realtime database
   const database = firebase.database();
   const auth = firebase.auth();
 
-  //cache the DOM from html forms
+  // Access the values from the html sign up and log in form
   const loginForm = $("#login-form");
   const loginEmail = $("#login-email");
   const loginPassword = $("#login-password");
@@ -24,10 +24,13 @@ $(document).ready(function() {
   const signUpEmail = $("#sign-up-email");
   const signUpPassword = $("#sign-up-password");
   const signUpButton = $("#sign-up-button");
+
   const logoutButton = $("#logout-button");
+
   const status = $("#status");
   const errors = $("#errors");
-  const addItemArea = $("#app-area");
+
+  const toDoList = $("#to-do-list");
 
   $("#hideit").click(function() {
     $("#sign-up-form").hide();
@@ -38,16 +41,16 @@ $(document).ready(function() {
     $("#sign-up-form").show();
   });
 
-  //login form
+  // Log in
   loginForm.on("submit", e => {
     e.preventDefault();
     const email = loginEmail.val();
     const pass = loginPassword.val();
-    const promise = auth.createUserWithEmailAndPassword(email, pass);
+    const promise = auth.signInWithEmailAndPassword(email, pass);
     promise.catch(e => displayError(e.message));
   });
 
-  //sign up form
+  // Sign up
   signUpForm.on("submit", e => {
     e.preventDefault();
     const email = signUpEmail.val();
@@ -56,30 +59,48 @@ $(document).ready(function() {
     promise.catch(e => displayError(e.message));
   });
 
+  // Log out
   logoutButton.on("click", () => {
     auth.signOut();
   });
 
+  // UID is global so it can be accessed anywhere
+  var uid = "";
+
+  // Firebase monitors the Auth state in real time. Use this if/else statement to do things based on that state.
   firebase.auth().onAuthStateChanged(firebaseUser => {
     if (firebaseUser) {
-      //logged in user properties
+      //Everything in this if is for a logged in user
       console.log(firebaseUser);
-      addItemArea.show();
+      toDoList.show();
       loginForm.hide();
       signUpForm.hide();
       logoutButton.show();
       status.html('Status: <span class="status-green">logged in</span>');
+      $("#hideit").hide();
+      $("#showit").hide();
+      uid = firebaseUser.uid;
     } else {
+      //Everything in this "else" is when no one is logged in
       console.log("not logged in");
-      addItemArea.hide();
+      toDoList.hide();
       loginForm.hide();
       signUpForm.show();
       logoutButton.hide();
       status.html('Status: <span class="status-red">not logged in</span>');
+      $("#hideit").show();
+      $("#showit").show();
     }
   });
 
-  //error handling
+  // add event
+  $("#add-item-form").on("submit", e => {
+    e.preventDefault();
+    item = $("#item").val();
+    addItemForm[0].reset();
+  });
+
+  // error
   var displayError = message => {
     console.log("this happened");
     errors.text(message);

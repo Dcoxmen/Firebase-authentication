@@ -4,24 +4,61 @@ body {
   text-align: center;
   margin-top: 2%;
 }
+.navbar-collapse.collapse {
+  display: block !important;
+}
 img {
-  width: 20%;
+  width: 100%;
 }
 input {
   margin-right: 10px;
-  padding: 10px;
+  padding: 1px;
 }
+td {
+  text-align: center;
+}
+a:hover {
+  cursor: pointer;
+}
+#trainData {
+  width: 100%;
+}
+#status {
+  color: rgb(71, 82, 116);
+  font-size: 1em;
+  /* text-align: center; */
+  /* vertical-align: middle; */
+  margin-bottom: 4%;
+}
+.btn-grp {
+  margin-top: 5%;
+}
+.vert-grp {
+  background-color: rgb(151, 158, 218);
+}
+.header {
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 800px;
+  /* grid-column-gap: 40px; */
+  margin: auto;
+}
+.header > div {
+  width: 200px;
+  margin: auto;
+}
+
 .hide {
   display: none;
 }
 .main-container {
   margin: auto;
-  margin-top: 10vh;
-  margin-bottom: 10vh;
+  margin-top: 2%;
+  margin-bottom: 4%;
   border: 1px solid #ccc;
-  padding: 20px;
-  position: relative;
-  max-width: 800px;
+  padding: 5px 10px;
+  position: relatabive;
+  max-width: 1200px;
 }
 .my-orange {
   position: absolute;
@@ -43,6 +80,18 @@ input {
 }
 .status-green {
   color: green;
-  font-size: 2em;
+
   vertical-align: middle;
+}
+.panel-heading {
+  text-align: center;
+  color: #ffffff;
+  background-color: rgb(82, 106, 128);
+}
+.form-group {
+  margin: 10px 1px;
+}
+.blu-bk {
+  background-color: rgb(60, 122, 255);
+  margin: 10% 1%;
 }
