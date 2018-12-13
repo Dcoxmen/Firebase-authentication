@@ -7,7 +7,7 @@ Because that Rock Paper Scissors Game is Too Damn Hard
 Overview
 In this assignment, you'll create a train schedule application that incorporates Firebase to host arrival and departure data. Your app will retrieve and manipulate this information with Moment.js. This website will provide up-to-date information about various trains, namely their arrival times and how many minutes remain until they arrive at their station.
 
-# I originally made a firebase authentication area for my portfolio. I added the train scheduler to it within this one page application. Uses authentication to display secure area on the page after login.
+I originally made a firebase authentication area for my portfolio. I added the train scheduler to it within this one page application. Uses authentication to display secure area on the page after login.
 
 Setup
 
